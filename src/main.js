@@ -16,11 +16,41 @@ import {
     faPhone,
     faMapMarker,
     faChevronRight,
-    faChevronLeft
-
+    faChevronLeft,
+    faUsers,
+    faSearch,
+    // Ikon baru yang ditambahkan
+    faNetworkWired,
+    faUserTie,
+    faAward,
+    faHourglassHalf,
+    faHandshake,
+    faClipboardCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHome, faUser, faBriefcase, faSignInAlt, faEye, faEyeSlash, faEnvelope, faPhone, faMapMarker, faChevronRight, faChevronLeft);
+// Daftarkan semua ikon yang dibutuhkan
+library.add(
+    faHome,
+    faUser,
+    faBriefcase,
+    faSignInAlt,
+    faEye,
+    faEyeSlash,
+    faEnvelope,
+    faPhone,
+    faMapMarker,
+    faChevronRight,
+    faChevronLeft,
+    faUsers,
+    faSearch,
+    // Daftarkan ikon-ikon baru di sini
+    faNetworkWired,
+    faUserTie,
+    faAward,
+    faHourglassHalf,
+    faHandshake,
+    faClipboardCheck,
+);
 
 const app = createApp(App);
 

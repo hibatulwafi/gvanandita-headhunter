@@ -9,7 +9,7 @@
             <!-- Navigation -->
             <nav class="hidden md:flex items-center gap-8">
                 <router-link to="/" class="hover:text-orange-500 transition font-medium"
-                    :class="$route.path === '/' ? 'font-bold text-white bg-custom-brand-700 px-3 py-1 rounded' : 'text-custom-brand-500-500'">
+                    :class="$route.path === '/' ? 'font-bold text-white bg-custom-brand-700 px-3 py-1 rounded' : 'text-custom-brand-500'">
                     Home
                 </router-link>
                 <router-link to="/about" class="hover:text-orange-500 transition font-medium"

@@ -1,14 +1,13 @@
 <template>
-  <section id="sponsors" class="max-w-[85%] mx-auto pb-24 sm:pb-32 overflow-hidden">
-    <h2 class="text-lg md:text-xl text-center mb-6">Our Platinum Sponsors</h2>
-
+  <section id="sponsors" class="max-w-[85%] mx-auto pb-8 mt-8 sm:pb-8 overflow-hidden">
+    <h2 class="text-3xl font-bold text-center mb-12">Our Client</h2>
     <div class="relative flex overflow-hidden">
-      <div
-        class="flex animate-marquee gap-12 items-center"
-      >
-        <img v-for="(image, i) in images" :key="i" :src="image" class="h-[50px] md:h-[70px] object-contain min-w-[120px]" />
+      <div class="flex animate-marquee gap-12 items-center">
+        <img v-for="(image, i) in images" :key="i" :src="image"
+          class="h-[50px] md:h-[70px] object-contain min-w-[120px]" />
         <!-- duplikat supaya seamless -->
-        <img v-for="(image, i) in images" :key="'dup-'+i" :src="image" class="h-[50px] md:h-[70px] object-contain min-w-[120px]" />
+        <img v-for="(image, i) in images" :key="'dup-' + i" :src="image"
+          class="h-[50px] md:h-[70px] object-contain min-w-[120px]" />
       </div>
     </div>
   </section>
@@ -28,9 +27,15 @@ const images = [
 
 <style scoped>
 @keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 .animate-marquee {
   display: flex;
   animation: marquee 20s linear infinite;
