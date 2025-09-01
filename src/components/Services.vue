@@ -2,7 +2,7 @@
 
 	<section class="py-16 bg-white">
 		<div class="container mx-auto px-6 lg:px-20">
-			<div class="text-center max-w-3xl mx-auto mb-14">
+			<div class="text-center max-w-3xl mx-auto mb-14" data-aos="fade-up">
 				<h2 class="text-3xl font-bold text-center mb-12">Mengapa Kami Jadi Pilihan Utama Partner Rekrutmen Anda
 				</h2>
 
@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="grid md:grid-cols-3 gap-12 text-center">
-				<div class="flex flex-col items-center">
+				<div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="100">
 					<div class="bg-orange-50 text-orange-500 p-5 rounded-full shadow-md shadow-orange-100 mb-4">
 						<font-awesome-icon icon="network-wired" class="text-2xl" />
 					</div>
@@ -27,7 +27,7 @@
 					</p>
 				</div>
 
-				<div class="flex flex-col items-center">
+				<div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="100">
 					<div class="bg-orange-50 text-orange-500 p-5 rounded-full shadow-md shadow-orange-100 mb-4">
 						<font-awesome-icon icon="user-tie" class="text-2xl" />
 					</div>
@@ -41,7 +41,7 @@
 					</p>
 				</div>
 
-				<div class="flex flex-col items-center">
+				<div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="100">
 					<div class="bg-orange-50 text-orange-500 p-5 rounded-full shadow-md shadow-orange-100 mb-4">
 						<font-awesome-icon icon="award" class="text-2xl" />
 					</div>
@@ -53,7 +53,7 @@
 					</p>
 				</div>
 
-				<div class="flex flex-col items-center">
+				<div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="100">
 					<div class="bg-orange-50 text-orange-500 p-5 rounded-full shadow-md shadow-orange-100 mb-4">
 						<font-awesome-icon icon="hourglass-half" class="text-2xl" />
 					</div>
@@ -64,7 +64,7 @@
 					</p>
 				</div>
 
-				<div class="flex flex-col items-center">
+				<div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="100">
 					<div class="bg-orange-50 text-orange-500 p-5 rounded-full shadow-md shadow-orange-100 mb-4">
 						<font-awesome-icon icon="handshake" class="text-2xl" />
 					</div>
@@ -76,7 +76,7 @@
 					</p>
 				</div>
 
-				<div class="flex flex-col items-center">
+				<div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="100">
 					<div class="bg-orange-50 text-orange-500 p-5 rounded-full shadow-md shadow-orange-100 mb-4">
 						<font-awesome-icon icon="clipboard-check" class="text-2xl" />
 					</div>
@@ -92,7 +92,7 @@
 	</section>
 
 	<section class="container mx-auto px-4 py-12 bg-slate-100">
-		<div class="mb-10">
+		<div class="mb-10" data-aos="fade-up">
 			<h2 class="text-3xl font-bold text-center mb-12">Kategori pekerjaan populer</h2>
 		</div>
 
@@ -100,30 +100,25 @@
 			<!-- Visible categories -->
 			<div v-for="(kategori, index) in visibleCategories" :key="kategori.nama"
 				class="flex flex-col items-center justify-center gap-2 p-4 text-center rounded-lg shadow-sm hover:shadow-md transition cursor-pointer bg-white border-l-4"
-				:class="gradients[index % gradients.length].border">
-				<!-- Icon -->
+				:class="gradients[index % gradients.length].border" data-aos="fade-up" :data-aos-delay="100 * index">
 				<div v-if="kategori.icon" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100">
 					<i :class="[kategori.icon, gradients[index % gradients.length].text, 'text-xl']"></i>
 				</div>
-				<!-- Text -->
 				<span class="font-medium">{{ kategori.nama }}</span>
 			</div>
 
 			<!-- Hidden categories -->
 			<div v-if="showMore" v-for="(kategori, index) in hiddenCategories" :key="kategori.nama"
 				class="flex flex-col items-center justify-center gap-2 p-4 text-center rounded-lg shadow-sm hover:shadow-md transition cursor-pointer bg-white border-l-4"
-				:class="gradients[index % gradients.length].border">
-				<!-- Icon -->
+				:class="gradients[index % gradients.length].border" data-aos="fade-up" :data-aos-delay="100 * index">
 				<div v-if="kategori.icon" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100">
 					<i :class="[kategori.icon, gradients[index % gradients.length].text, 'text-xl']"></i>
 				</div>
-				<!-- Text -->
 				<span class="font-medium">{{ kategori.nama }}</span>
 			</div>
 		</div>
 
-		<!-- Show more button -->
-		<div class="text-center mt-8">
+		<div class="text-center mt-8" data-aos="fade-up">
 			<button @click="toggleCategories"
 				class="py-2 px-6 rounded-full font-semibold text-gray-600 border border-gray-300 hover:bg-gray-100 transition">
 				{{ buttonText }}

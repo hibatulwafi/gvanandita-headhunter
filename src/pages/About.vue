@@ -4,8 +4,8 @@
     style="background-image: url('/images/hero/hero-bg-full.jpg');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="relative text-center text-white px-6">
-      <h1 class="text-3xl md:text-4xl font-bold">About Us</h1>
-      <p class="mt-3 text-lg max-w-2xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold" data-aos="zoom-in-left">About Us</h1>
+      <p class="mt-3 text-lg max-w-2xl mx-auto" data-aos="zoom-in-right" data-aos-delay="200">
         GVA Head Hunter – Solusi Rekrutmen yang Profesional & Tepat Sasaran
       </p>
     </div>
@@ -14,10 +14,10 @@
   <!-- Bagaimana Kami Bekerja -->
   <section class="py-16 lg:px-16 bg-white">
     <div class="container mx-auto px-4 md:px-6 space-y-16">
-      <h2 class="text-3xl font-bold text-center mb-12">Bagaimana Kami Bekerja</h2>
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Bagaimana Kami Bekerja</h2>
 
       <!-- Row 1 -->
-      <div class="flex flex-col md:flex-row items-center gap-8">
+      <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-left">
         <div class="flex-1">
           <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Profesional</span>
           <h2 class="text-base font-semibold mt-4">Komitmen pada Kualitas</h2>
@@ -34,7 +34,7 @@
       </div>
 
       <!-- Row 2 -->
-      <div class="flex flex-col md:flex-row items-center gap-8 md:flex-row-reverse">
+      <div class="flex flex-col md:flex-row items-center gap-8 md:flex-row-reverse"data-aos="fade-right">
         <div class="flex-1">
           <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Tepat Sasaran</span>
           <h2 class="text-base font-semibold mt-4">Seleksi yang Efektif</h2>
@@ -51,7 +51,7 @@
       </div>
 
       <!-- Row 3 -->
-      <div class="flex flex-col md:flex-row items-center gap-8">
+      <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-left">
         <div class="flex-1">
           <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Solusi</span>
           <h2 class="text-base font-semibold mt-4">Mitra Rekrutmen Terpercaya</h2>
@@ -72,11 +72,11 @@
   <!-- Proses Recruitment -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4 md:px-6">
-      <h2 class="text-3xl font-bold text-center mb-12">Proses Recruitment</h2>
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Proses Recruitment</h2>
 
       <div class="grid gap-6 max-w-3xl mx-auto">
         <!-- Step 1 -->
-        <div class="bg-white rounded-lg shadow p-6 border">
+        <div class="bg-white rounded-lg shadow p-6 border" data-aos="fade-up">
           <div class="flex justify-between items-start">
             <!-- Icon + Text -->
             <div class="flex items-start gap-4">
@@ -95,7 +95,7 @@
         </div>
 
         <!-- Step 2 -->
-        <div class="bg-white rounded-lg shadow p-6 border">
+        <div class="bg-white rounded-lg shadow p-6 border" data-aos="fade-up" data-aos-delay="200">
           <div class="flex justify-between items-start">
             <!-- Icon + Text -->
             <div class="flex items-start gap-4">
@@ -114,7 +114,7 @@
         </div>
 
         <!-- Step 3 -->
-        <div class="bg-white rounded-lg shadow p-6 border">
+        <div class="bg-white rounded-lg shadow p-6 border" data-aos="fade-up" data-aos-delay="400">
           <div class="flex justify-between items-start">
             <!-- Icon + Text -->
             <div class="flex items-start gap-4">
