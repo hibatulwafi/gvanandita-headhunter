@@ -6,7 +6,7 @@
     <div class="relative text-center text-white px-6">
       <h1 class="text-3xl md:text-4xl font-bold">About Us</h1>
       <p class="mt-3 text-lg max-w-2xl mx-auto">
-        Tentang GVA Head Hunter – Solusi Rekrutmen yang Profesional & Tepat Sasaran
+        GVA Head Hunter – Solusi Rekrutmen yang Profesional & Tepat Sasaran
       </p>
     </div>
   </section>
@@ -20,8 +20,8 @@
       <div class="flex flex-col md:flex-row items-center gap-8">
         <div class="flex-1">
           <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Profesional</span>
-          <h2 class="text-2xl font-semibold mt-4">Komitmen pada Kualitas</h2>
-          <p class="text-lg text-gray-600 mt-2">
+          <h2 class="text-base font-semibold mt-4">Komitmen pada Kualitas</h2>
+          <p class="text-base text-gray-600 mt-2">
             GVA Head Hunter berkomitmen menghadirkan talenta terbaik yang sesuai dengan kebutuhan klien.
             Setiap kandidat kami pilih melalui proses yang ketat, sehingga Anda mendapatkan SDM yang benar-benar siap
             memberikan kontribusi nyata.
@@ -37,8 +37,8 @@
       <div class="flex flex-col md:flex-row items-center gap-8 md:flex-row-reverse">
         <div class="flex-1">
           <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Tepat Sasaran</span>
-          <h2 class="text-2xl font-semibold mt-4">Seleksi yang Efektif</h2>
-          <p class="text-lg text-gray-600 mt-2">
+          <h2 class="text-base font-semibold mt-4">Seleksi yang Efektif</h2>
+          <p class="text-base text-gray-600 mt-2">
             Dengan jaringan yang luas serta metode seleksi yang terstruktur, kami membantu perusahaan menemukan
             kandidat berpengalaman yang selaras dengan budaya organisasi. Bukan hanya sekadar kompeten, tetapi juga
             cocok dengan visi perusahaan.
@@ -54,8 +54,8 @@
       <div class="flex flex-col md:flex-row items-center gap-8">
         <div class="flex-1">
           <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Solusi</span>
-          <h2 class="text-2xl font-semibold mt-4">Mitra Rekrutmen Terpercaya</h2>
-          <p class="text-lg text-gray-600 mt-2">
+          <h2 class="text-base font-semibold mt-4">Mitra Rekrutmen Terpercaya</h2>
+          <p class="text-base text-gray-600 mt-2">
             Kami hadir sebagai mitra strategis yang mendukung perusahaan dalam menyediakan solusi rekrutmen
             yang cepat, efisien, dan terpercaya. Bersama kami, rekrutmen bukan lagi tantangan, melainkan peluang
             untuk berkembang.
@@ -76,52 +76,65 @@
 
       <div class="grid gap-6 max-w-3xl mx-auto">
         <!-- Step 1 -->
-        <div class="relative bg-white rounded-lg shadow p-6 border">
-          <div class="flex items-start gap-4">
-            <font-awesome-icon icon="search" class="text-orange-500 text-2xl" />
-            <div>
-              <h3 class="text-xl font-semibold">Specific Analysis</h3>
-              <p class="text-gray-600">
-                Analisis mendalam untuk memahami kebutuhan spesifik perusahaan, sehingga kandidat yang direkomendasikan
-                benar-benar sesuai.
-              </p>
+        <div class="bg-white rounded-lg shadow p-6 border">
+          <div class="flex justify-between items-start">
+            <!-- Icon + Text -->
+            <div class="flex items-start gap-4">
+              <font-awesome-icon icon="search" class="text-orange-500 text-2xl" />
+              <div>
+                <h3 class="text-xl font-semibold">Specific Analysis</h3>
+                <p class="text-gray-600">
+                  Analisis mendalam untuk memahami kebutuhan spesifik perusahaan,
+                  sehingga kandidat yang direkomendasikan benar-benar sesuai.
+                </p>
+              </div>
             </div>
+            <!-- Number -->
+            <span class="text-4xl font-bold text-gray-200">01</span>
           </div>
-          <span class="absolute top-4 right-6 text-4xl font-bold text-gray-200">01</span>
         </div>
 
         <!-- Step 2 -->
-        <div class="relative bg-white rounded-lg shadow p-6 border">
-          <div class="flex items-start gap-4">
-            <font-awesome-icon icon="users" class="text-orange-500 text-2xl" />
-            <div>
-              <h3 class="text-xl font-semibold">Selection & Recruitment</h3>
-              <p class="text-gray-600">
-                Proses seleksi ketat melalui assessment, wawancara, dan evaluasi untuk menjaring kandidat terbaik
-                sesuai standar perusahaan.
-              </p>
+        <div class="bg-white rounded-lg shadow p-6 border">
+          <div class="flex justify-between items-start">
+            <!-- Icon + Text -->
+            <div class="flex items-start gap-4">
+              <font-awesome-icon icon="users" class="text-orange-500 text-2xl" />
+              <div>
+                <h3 class="text-xl font-semibold">Selection & Recruitment</h3>
+                <p class="text-gray-600">
+                  Proses seleksi ketat melalui assessment, wawancara, dan evaluasi
+                  untuk menjaring kandidat terbaik sesuai standar perusahaan.
+                </p>
+              </div>
             </div>
+            <!-- Number -->
+            <span class="text-4xl font-bold text-gray-200">02</span>
           </div>
-          <span class="absolute top-4 right-6 text-4xl font-bold text-gray-200">02</span>
         </div>
 
         <!-- Step 3 -->
-        <div class="relative bg-white rounded-lg shadow p-6 border">
-          <div class="flex items-start gap-4">
-            <font-awesome-icon icon="briefcase" class="text-orange-500 text-2xl" />
-            <div>
-              <h3 class="text-xl font-semibold">Hiring Process & Onboarding</h3>
-              <p class="text-gray-600">
-                Kami mendampingi perusahaan hingga proses onboarding selesai, memastikan transisi berjalan mulus
-                bagi kandidat maupun perusahaan.
-              </p>
+        <div class="bg-white rounded-lg shadow p-6 border">
+          <div class="flex justify-between items-start">
+            <!-- Icon + Text -->
+            <div class="flex items-start gap-4">
+              <font-awesome-icon icon="briefcase" class="text-orange-500 text-2xl" />
+              <div>
+                <h3 class="text-xl font-semibold">Hiring Process & Onboarding</h3>
+                <p class="text-gray-600">
+                  Kami mendampingi perusahaan hingga proses onboarding selesai,
+                  memastikan transisi berjalan mulus bagi kandidat maupun perusahaan.
+                </p>
+              </div>
             </div>
+            <!-- Number -->
+            <span class="text-4xl font-bold text-gray-200">03</span>
           </div>
-          <span class="absolute top-4 right-6 text-4xl font-bold text-gray-200">03</span>
         </div>
       </div>
     </div>
   </section>
+
 
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4 md:px-6">

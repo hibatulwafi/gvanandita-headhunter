@@ -68,16 +68,16 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const slides = [
     {
-        image: '/public/images/hero/slider-1.jpg',
+        image: '/images/hero/slider-1.jpg',
         alt: 'GVA Head Hunter',
         title1: 'Find The',
         title1white: 'Best Talent',
         title2: 'For Your',
         title2white: 'Business',
-        description: 'GVA Head Hunter is a headhunter company that is committed to presenting the best talent.'
+        description: 'GVA Head Hunter is a company that is committed to presenting the best talent.'
     },
     {
-        image: '/public/images/hero/slider-2.jpg',
+        image: '/images/hero/slider-2.jpg',
         alt: 'GVA Head Hunter',
         title1: 'Grow Your',
         title1white: 'Business',
@@ -86,7 +86,7 @@ const slides = [
         description: 'With a wide network and a precise selection process, we help companies find competent candidates.'
     },
     {
-        image: '/public/images/hero/slider-3.jpg',
+        image: '/images/hero/slider-3.jpg',
         alt: 'GVA Head Hunter',
         title1: 'Get The',
         title1white: 'Best',

@@ -6,7 +6,7 @@
         <div class="flex items-center mb-4">
           <img src="../../public/images/logo.png" alt="Logo" class="w-32 mr-4" />
           <p class="text-gray-400 text-base leading-relaxed">
-            GVA Head Hunter adalah perusahaan headhunter yang berkomitmen menghadirkan talenta terbaik sesuai kebutuhan
+            GVA Head Hunter adalah perusahaan yang berkomitmen menghadirkan talenta terbaik sesuai kebutuhan
             klien.
           </p>
         </div>
