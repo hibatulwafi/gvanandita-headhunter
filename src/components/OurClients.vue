@@ -1,6 +1,6 @@
 <template>
   <section id="sponsors" class="max-w-[85%] mx-auto pb-8 mt-8 sm:pb-8 overflow-hidden">
-    <h2 class="text-3xl font-bold text-center mb-12">Our Client</h2>
+    <h2 class="text-3xl font-bold text-center mb-12">Our Clients</h2>
     <div class="relative flex overflow-hidden">
       <div class="flex animate-marquee gap-12 items-center">
         <img v-for="(image, i) in images" :key="i" :src="image"

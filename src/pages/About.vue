@@ -101,9 +101,9 @@
             <div class="flex items-start gap-4">
               <font-awesome-icon icon="users" class="text-orange-500 text-2xl" />
               <div>
-                <h3 class="text-xl font-semibold">Selection & Recruitment</h3>
+                <h3 class="text-xl font-semibold">Recruitment</h3>
                 <p class="text-gray-600">
-                  Proses seleksi ketat melalui assessment, wawancara, dan evaluasi
+                  Proses seleksi ketat melalui Asesmen, wawancara, dan evaluasi
                   untuk menjaring kandidat terbaik sesuai standar perusahaan.
                 </p>
               </div>
@@ -122,7 +122,7 @@
               <div>
                 <h3 class="text-xl font-semibold">Hiring Process & Onboarding</h3>
                 <p class="text-gray-600">
-                  Kami mendampingi perusahaan hingga proses onboarding selesai,
+                  Kami mendampingi perusahaan hingga proses <i>onboarding</i> selesai,
                   memastikan transisi berjalan mulus bagi kandidat maupun perusahaan.
                 </p>
               </div>

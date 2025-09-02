@@ -74,7 +74,7 @@ const slides = [
         title1white: 'Best Talent',
         title2: 'For Your',
         title2white: 'Business',
-        description: 'GVA Head Hunter is a company that is committed to presenting the best talent.'
+        description: 'GVA Head Hunter is a company that is committed to present the Best Talent.'
     },
     {
         image: '/images/hero/slider-2.jpg',
@@ -83,7 +83,7 @@ const slides = [
         title1white: 'Business',
         title2: 'With Our',
         title2white: 'Expertise',
-        description: 'With a wide network and a precise selection process, we help companies find competent candidates.'
+        description: 'With extensive network and a precise recruitment process, we help companies finding competent candidates.'
     },
     {
         image: '/images/hero/slider-3.jpg',
