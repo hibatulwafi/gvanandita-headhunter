@@ -14,8 +14,11 @@
     "@fortawesome/vue-fontawesome": "^3.1.1",
     "@selemondev/vue3-marquee": "^0.0.8",
     "aos": "^2.3.4",
+    "axios": "^1.11.0",
+    "dayjs": "^1.11.18",
     "lucide-vue-next": "^0.542.0",
     "pinia": "^3.0.3",
+    "sweetalert2": "^11.23.0",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },

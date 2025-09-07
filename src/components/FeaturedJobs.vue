@@ -1,207 +1,307 @@
 <template>
-    <!-- Hero Section -->
-    <div class="relative bg-cover bg-center h-[380px] flex items-center justify-center"
-        style="background-image: url('/images/hero/hero-bg-jobs.jpg')">
-        <div class="bg-gradient-to-r from-slate-900 to-slate-800 bg-opacity-80 text-center px-6 py-8 mx-6 rounded-xl">
-            <h1 class="text-2xl md:text-3xl font-bold text-white">
-                Find 513 Career Opportunities, Register Now!
-            </h1>
-            <div class="mt-4 flex flex-col md:flex-row gap-3 justify-center">
-                <input v-model="searchPosition" type="text" placeholder="Job Position"
-                    class="px-4 py-2 rounded-md w-full md:w-60 focus:outline-none" />
-                <input v-model="searchLocation" type="text" placeholder="Location"
-                    class="px-4 py-2 rounded-md w-full md:w-60 focus:outline-none" />
-                <button
-                    class="px-6 py-2 rounded-md bg-gradient-to-r from-orange-500 to-yellow-400 text-white font-semibold shadow">
-                    Find Me Opportunities
-                </button>
-            </div>
-        </div>
+  <!-- Hero Section -->
+  <div class="relative bg-cover bg-center h-[280px] flex items-center justify-center"
+    style="background-image: url('/images/hero/hero-bg-jobs.jpg')" data-aos="fade-up">
+    <div class="bg-slate-900 bg-opacity-80 text-center px-6 py-8 mx-6 rounded-xl max-w-3xl w-full">
+      <h1 class="text-2xl md:text-3xl font-bold text-white">
+        Lowongan Kerja di Indonesia
+      </h1>
+      <div class="mt-4 flex flex-col md:flex-row gap-3 justify-center">
+        <input v-model="jobStore.searchPosition" type="text" placeholder="Cari Pekerjaan / Skill"
+          class="px-4 py-2 rounded-md w-full md:w-60 focus:outline-none border" />
+        <input v-model="jobStore.searchLocation" type="text" placeholder="Lokasi"
+          class="px-4 py-2 rounded-md w-full md:w-60 focus:outline-none border" />
+        <button @click="refreshJobs"
+          class="px-6 py-2 rounded-md bg-gradient-to-r from-orange-500 to-yellow-400 text-white font-semibold shadow hover:opacity-90 transition">
+          Cari
+        </button>
+      </div>
     </div>
+  </div>
 
-    <!-- Filter + Job List -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <!-- Filter Buttons -->
-            <div class="flex flex-wrap gap-3 mb-6 justify-center">
-                <button v-for="country in countries" :key="country.name" @click="activeCountry = country.name"
-                    class="px-4 py-2 rounded-md border transition flex items-center space-x-2" :class="activeCountry === country.name
-                        ? 'bg-green-100 border-green-600 text-green-700 font-semibold'
-                        : 'bg-white text-gray-600 hover:bg-gray-100'">
-                    <span>{{ country.label }}</span>
-                    <img v-if="country.flag" :src="country.flag" class="h-4 w-6 object-cover rounded-sm" />
-                </button>
+  <!-- Filter + Job List -->
+  <section class="py-10 bg-gray-50">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- Filter -->
+      <aside class="bg-white rounded-lg shadow p-4 space-y-4 md:col-span-1
+               md:sticky md:top-24 md:self-start md:max-h-[80vh] md:overflow-y-auto min-h-[200px]">
+        <template v-for="section in sections" :key="section.key">
+          <div>
+            <button @click="section.open = !section.open"
+              class="flex justify-between w-full text-left font-semibold text-gray-800 mt-2 border-b border-gray-300 pb-2">
+              <span>{{ section.label }}</span>
+              <span>{{ section.open ? '−' : '+' }}</span>
+            </button>
+
+            <!-- Transition untuk expand -->
+            <transition enter-active-class="transition-all duration-300 ease-out"
+              leave-active-class="transition-all duration-200 ease-in" enter-from-class="max-h-0 opacity-0"
+              enter-to-class="max-h-screen opacity-100" leave-from-class="max-h-screen opacity-100"
+              leave-to-class="max-h-0 opacity-0">
+              <div v-if="section.open" class="mt-2 flex flex-col space-y-1 text-sm text-gray-600 overflow-hidden">
+                <!-- Loading State -->
+                <p v-if="isFilterEmpty(section.key)" class="text-gray-500 italic text-sm">
+                  Memuat filter...
+                </p>
+
+                <template v-else-if="section.key === 'job_types'">
+                  <label v-for="type in jobStore.filters.job_types" :key="type">
+                    <input type="checkbox" :value="type" v-model="jobStore.selectedJobTypes" />
+                    {{ type }}
+                  </label>
+                </template>
+
+                <template v-else-if="section.key === 'locations'">
+                  <label v-for="loc in jobStore.filters.job_location_types" :key="loc">
+                    <input type="checkbox" :value="loc" v-model="jobStore.selectedLocations" />
+                    {{ loc }}
+                  </label>
+                </template>
+
+                <template v-else-if="section.key === 'categories'">
+                  <label v-for="cat in jobStore.filters.categories" :key="cat.id">
+                    <input type="checkbox" :value="cat.id" v-model="jobStore.selectedCategories" />
+                    {{ cat.name }}
+                  </label>
+                </template>
+
+                <template v-else-if="section.key === 'levels'">
+                  <label v-for="lvl in jobStore.filters.experience_levels" :key="lvl">
+                    <input type="checkbox" :value="lvl" v-model="jobStore.selectedLevels" />
+                    {{ lvl }}
+                  </label>
+                </template>
+              </div>
+            </transition>
+          </div>
+        </template>
+      </aside>
+
+      <!-- Job List -->
+      <div class="md:col-span-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Job Card -->
+          <div v-for="job in jobStore.jobs" :key="job.id"
+            class="bg-white rounded-lg shadow p-4 border hover:border-blue-500 transition">
+            <!-- Header: Job title + Salary -->
+            <div class="flex justify-between items-start">
+              <!-- Job Title -->
+              <h3 class="text-lg font-semibold text-gray-800 max-w-[70%] truncate" :title="job.job_title">
+                {{ job.job_title }}
+              </h3>
+
+              <!-- Salary -->
+              <p class="text-green-700 font-semibold text-right text-sm md:text-lg ml-2 shrink-0">
+                {{ formatCompactCurrency(job.min_salary, job.salary_currency) }} -
+                {{ formatCompactCurrency(job.max_salary, job.salary_currency) }}
+              </p>
             </div>
 
-            <!-- Job List Responsive -->
-            <!-- Desktop (Table) -->
-            <div class="hidden md:block overflow-x-auto bg-white rounded-lg shadow">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="px-4 py-3">Position</th>
-                            <th class="px-4 py-3">Industry</th>
-                            <th class="px-4 py-3">Level</th>
-                            <th class="px-4 py-3">Work Base</th>
-                            <th class="px-4 py-3">Education</th>
-                            <th class="px-4 py-3">Salary</th>
-                            <th class="px-4 py-3"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(job, index) in filteredJobs" :key="index" class="border-b hover:bg-gray-50">
-                            <td class="px-4 py-3 font-medium text-gray-800">{{ job.position }}</td>
-                            <td class="px-4 py-3 text-gray-600">{{ job.industry }}</td>
-                            <td class="px-4 py-3 text-gray-600">{{ job.level }}</td>
-                            <td class="px-4 py-3 text-gray-600">{{ job.workBase }}</td>
-                            <td class="px-4 py-3 text-gray-600">{{ job.education }}</td>
-                            <td class="px-4 py-3 font-semibold text-green-700">{{ job.salary }}</td>
-                            <td class="px-4 py-3 text-blue-600 hover:underline text-sm">Details</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded">
+                {{ job.category?.name }}
+              </span>
+              <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded capitalize">
+                {{ job.job_location_type }}
+              </span>
+              <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded capitalize">
+                {{ job.experience_level }}
+              </span>
             </div>
 
-            <!-- Mobile (Card Layout) -->
-            <div class="grid md:hidden gap-4">
-                <div v-for="(job, index) in filteredJobs" :key="index" class="bg-white rounded-lg shadow p-4">
-                    <h3 class="text-lg font-semibold text-gray-800">{{ job.position }}</h3>
-                    <p class="text-sm text-gray-600">{{ job.industry }} • {{ job.level }}</p>
-                    <p class="text-sm text-gray-600 mt-1">
-                        📍 {{ job.workBase }}
-                    </p>
-                    <p class="text-sm text-gray-600">🎓 {{ job.education }}</p>
-                    <p class="text-green-700 font-semibold mt-1">{{ job.salary }}</p>
-                    <a href="#" class="text-blue-600 hover:underline text-sm mt-2 inline-block">Details</a>
-                </div>
+            <!-- Company & Location -->
+            <p class="text-sm text-gray-600 mt-2">
+              <font-awesome-icon icon="building" class="mr-1" />
+              {{ job.company?.company_name }}
+              <span class="mx-2">|</span>
+              <font-awesome-icon icon="map-marker-alt" class="mr-1" />
+              {{ job.city }}, {{ job.country }}
+            </p>
+
+            <hr class="my-2" />
+            <!-- Published At + Button -->
+            <div class="mt-3 flex items-center justify-between">
+              <!-- Published At -->
+              <p class="text-sm text-gray-600">
+                {{ formatRelative(job.published_at) }}
+              </p>
+
+              <!-- Details Button -->
+              <router-link :to="`/jobs/${job.slug}`"
+                class="bg-custom-brand-600 hover:bg-custom-brand-700 text-white font-semibold py-1 px-12 rounded-md text-sm inline-block">
+                Details
+              </router-link>
             </div>
+
+          </div>
+
         </div>
-    </section>
+
+        <!-- Loader -->
+        <div v-if="jobStore.loading" class="text-center py-6 text-gray-600">
+          Memuat lebih banyak pekerjaan...
+        </div>
+
+        <!-- Empty State -->
+        <div v-else-if="!jobStore.hasMore" class="text-center py-6 text-gray-600">
+          Tidak ada data lagi.
+        </div>
+        <!-- Infinite Scroll Trigger -->
+        <div ref="loadMoreTrigger" class="h-6"></div>
+      </div>
+
+    </div>
+  </section>
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+/* ===============================
+   Imports
+================================ */
+import { ref, reactive, onMounted, onBeforeUnmount, watch } from "vue"
+import { useRoute } from "vue-router"
+import { useJobStore } from "@/stores/jobStore"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import "dayjs/locale/id" // bahasa Indonesia
 
-const countries = [
-    { name: "All", label: "All" },
-    { name: "Indonesia", label: "Indonesia", flag: "https://flagcdn.com/id.svg" },
-    { name: "Malaysia", label: "Malaysia", flag: "https://flagcdn.com/my.svg" },
-    { name: "Thailand", label: "Thailand", flag: "https://flagcdn.com/th.svg" },
-    { name: "Philippines", label: "Philippines", flag: "https://flagcdn.com/ph.svg" },
-]
+/* ===============================
+   Dayjs Setup
+================================ */
+dayjs.extend(relativeTime)
+dayjs.locale("id")
 
-const activeCountry = ref("All")
-const searchPosition = ref("")
-const searchLocation = ref("")
+/* ===============================
+   Utils / Helpers
+================================ */
+function formatRelative(date) {
+  return dayjs(date).fromNow()
+}
 
-const jobs = ref([
-    {
-        position: "ROW Engineer",
-        industry: "Telecommunication",
-        level: "Staff/Officer",
-        workBase: "Lipa, Cebu",
-        education: "Bachelor",
-        salary: "Apply to know more",
-        country: "Philippines",
-    },
-    {
-        position: "Senior Executive, Corporate Secretary",
-        industry: "Accounting / Audit / Tax Services",
-        level: "Senior Executive",
-        workBase: "Kuala Lumpur",
-        education: "Bachelor",
-        salary: "MYR 4.000 - 5.000",
-        country: "Malaysia",
-    },
-    {
-        position: "Business Development Manager (ID)",
-        industry: "Architecture / Construction",
-        level: "Manager - Department",
-        workBase: "DKI Jakarta",
-        education: "Bachelor/Master",
-        salary: "IDR 15.000.000 - 28.000.000",
-        country: "Indonesia",
-    },
-    {
-        position: "Project Coordinator",
-        industry: "Telecommunication",
-        level: "Staff/Officer",
-        workBase: "Bangkok",
-        education: "Bachelor",
-        salary: "THB 20.000 - 26.000",
-        country: "Thailand",
-    },
-    {
-        position: "Data Analyst",
-        industry: "Banking / Financial Services",
-        level: "Staff/Officer",
-        workBase: "Singapore",
-        education: "Bachelor",
-        salary: "SGD 3.500 - 5.000",
-        country: "Singapore",
-    },
-    {
-        position: "Marketing Manager",
-        industry: "FMCG / Consumer Goods",
-        level: "Manager - Department",
-        workBase: "Ho Chi Minh City",
-        education: "Bachelor/Master",
-        salary: "VND 30.000.000 - 45.000.000",
-        country: "Vietnam",
-    },
-    {
-        position: "Cloud Engineer",
-        industry: "IT / Software",
-        level: "Senior Executive",
-        workBase: "Kuala Lumpur",
-        education: "Bachelor",
-        salary: "MYR 6.000 - 10.000",
-        country: "Malaysia",
-    },
-    {
-        position: "Sales Manager",
-        industry: "FMCG / Consumer Goods",
-        level: "Manager - Department",
-        workBase: "Bangkok",
-        education: "Bachelor/Master",
-        salary: "THB 40.000 - 60.000",
-        country: "Thailand",
-    },
-    {
-        position: "HR Generalist",
-        industry: "Banking / Financial Services",
-        level: "Staff/Officer",
-        workBase: "Singapore",
-        education: "Bachelor",
-        salary: "SGD 3.000 - 5.000",
-        country: "Singapore",
-    },
-    {
-        position: "Accountant",
-        industry: "Accounting / Audit / Tax Services",
-        level: "Staff/Officer",
-        workBase: "Ho Chi Minh City",
-        education: "Bachelor",
-        salary: "VND 15.000.000 - 25.000.000",
-        country: "Vietnam",
-    },
+function formatCompactCurrency(amount, currency) {
+  if (!amount) return ""
+
+  if (currency === "IDR") {
+    if (amount >= 1_000_000) {
+      const juta = amount / 1_000_000
+      return juta % 1 === 0 ? `${juta}jt` : `${juta.toFixed(1)}jt`
+    }
+    return amount.toLocaleString("id-ID")
+  }
+
+  if (currency === "USD") {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      notation: "compact",
+      maximumFractionDigits: 1,
+    }).format(amount)
+  }
+
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(amount)
+}
+
+/* ===============================
+   State & Stores
+================================ */
+const jobStore = useJobStore()
+const route = useRoute()
+const loadMoreTrigger = ref(null)
+let observer = null
+
+// Sections accordion
+const sections = reactive([
+  { key: "job_types", label: "Tipe Pekerjaan", open: true },
+  { key: "locations", label: "Lokasi Kerja", open: false },
+  { key: "categories", label: "Kategori", open: false },
+  { key: "levels", label: "Level", open: false },
 ])
 
-const filteredJobs = computed(() => {
-    let result = jobs.value
-    if (activeCountry.value !== "All") {
-        result = result.filter(job => job.country === activeCountry.value)
-    }
-    if (searchPosition.value) {
-        result = result.filter(job =>
-            job.position.toLowerCase().includes(searchPosition.value.toLowerCase())
-        )
-    }
-    if (searchLocation.value) {
-        result = result.filter(job =>
-            job.workBase.toLowerCase().includes(searchLocation.value.toLowerCase())
-        )
-    }
-    return result
+// Helper: cek filter kosong
+const isFilterEmpty = (key) => {
+  const f = jobStore.filters
+  if (!f) return true
+  return (
+    (key === "job_types" && f.job_types.length === 0) ||
+    (key === "locations" && f.job_location_types.length === 0) ||
+    (key === "categories" && f.categories.length === 0) ||
+    (key === "levels" && f.experience_levels.length === 0)
+  )
+}
+
+/* ===============================
+   Jobs Fetching
+================================ */
+const refreshJobs = () => jobStore.fetchJobs(1, false)
+
+const setupObserver = () => {
+  if (observer) observer.disconnect()
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      if (
+        entries[0].isIntersecting &&
+        jobStore.pagination.next_page_url &&
+        !jobStore.loading
+      ) {
+        jobStore.fetchJobs(jobStore.pagination.current_page + 1, true)
+      }
+    },
+    { threshold: 1.0 }
+  )
+
+  if (loadMoreTrigger.value) observer.observe(loadMoreTrigger.value)
+}
+
+/* ===============================
+   Watchers
+================================ */
+// Pre-fill search dari query param
+jobStore.searchPosition = route.query.position || ""
+jobStore.searchLocation = route.query.location || ""
+
+// Refresh jika query berubah
+watch(
+  () => [route.query.position, route.query.location],
+  () => {
+    refreshJobs()
+  }
+)
+
+// Debounce filter (2 detik)
+let filterTimeout = null
+watch(
+  () => [
+    jobStore.selectedJobTypes,
+    jobStore.selectedLocations,
+    jobStore.selectedCategories,
+    jobStore.selectedLevels,
+  ],
+  () => {
+    if (filterTimeout) clearTimeout(filterTimeout)
+    filterTimeout = setTimeout(() => {
+      jobStore.fetchJobs(1, false)
+    }, 2000)
+  },
+  { deep: true }
+)
+
+/* ===============================
+   Lifecycle
+================================ */
+onMounted(() => {
+  jobStore.fetchFilters().then(() => {
+    refreshJobs()
+    setupObserver()
+  })
+})
+
+onBeforeUnmount(() => {
+  if (observer) observer.disconnect()
 })
 </script>

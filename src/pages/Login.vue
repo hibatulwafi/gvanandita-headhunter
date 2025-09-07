@@ -7,6 +7,12 @@
         <p class="text-gray-500 mb-6">Login to your account</p>
 
         <form @submit.prevent="handleLogin" class="space-y-5">
+          <!-- Pesan Error -->
+          <div v-if="authStore.error"
+            class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative" role="alert">
+            <span class="block sm:inline">{{ authStore.error }}</span>
+          </div>
+
           <!-- Email -->
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -20,13 +26,12 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <div class="relative">
               <input v-model="password" :type="showPassword ? 'text' : 'password'" required
-                class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 placeholder="••••••••" />
               <button type="button" @click="showPassword = !showPassword"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-indigo-600"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-custom-brand-700 focus:outline-none"
                 tabindex="-1">
-                <span v-if="showPassword"><font-awesome-icon icon="eye-slash" class="mr-2" /></span>
-                <span v-else><font-awesome-icon icon="eye" class="mr-2" /></span>
+                <font-awesome-icon :icon="showPassword ? 'eye-slash' : 'eye'" />
               </button>
             </div>
           </div>
@@ -34,22 +39,24 @@
           <!-- Remember me -->
           <div class="flex items-center justify-between text-sm">
             <label class="flex items-center gap-2">
-              <input type="checkbox" v-model="remember" class="h-4 w-4 text-indigo-600 rounded" />
+              <input type="checkbox" v-model="remember" class="h-4 w-4 text-custom-brand-700 rounded" />
               <span class="text-gray-600">Remember me</span>
             </label>
-            <a href="#" class="text-indigo-600 hover:underline">Forgot password?</a>
+            <!-- <a href="#" class="text-custom-brand-700 hover:underline">Forgot password?</a> -->
           </div>
 
           <!-- Submit -->
           <button type="submit"
-            class="w-full bg-indigo-600 text-white py-2 rounded-xl font-semibold hover:bg-indigo-700 transition duration-200">
-            Login
+            class="w-full bg-custom-brand-500 text-white py-2 rounded-xl font-semibold hover:bg-custom-brand-800 transition duration-200 disabled:bg-indigo-400 disabled:cursor-not-allowed"
+            :disabled="authStore.loading">
+            <span v-if="authStore.loading">Loading...</span>
+            <span v-else>Login</span>
           </button>
         </form>
 
         <p class="text-center text-gray-500 text-sm mt-6">
-          Don't have an account?
-          <router-link to="/register" class="text-indigo-600 font-medium hover:underline">Sign up</router-link>
+          New here?
+          <router-link to="/register" class="text-custom-brand-700 font-medium hover:underline">Register Here!</router-link>
         </p>
       </div>
 
@@ -62,17 +69,34 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-const email = ref("")
-const password = ref("")
-const remember = ref(false)
-const showPassword = ref(false)
+// Import dan tambahkan ikon Font Awesome
+library.add(faEye, faEyeSlash);
 
-const handleLogin = () => {
-  console.log("Email:", email.value)
-  console.log("Password:", password.value)
-  console.log("Remember:", remember.value)
-  alert("Login clicked!")
-}
+const authStore = useAuthStore();
+const router = useRouter();
+
+const email = ref("");
+const password = ref("");
+const remember = ref(false);
+const showPassword = ref(false);
+
+const handleLogin = async () => {
+  // Clear any previous error before a new attempt
+  authStore.error = null;
+  const success = await authStore.login({
+    email: email.value,
+    password: password.value,
+  });
+
+  if (success) {
+    router.push({ name: "profile" });
+  }
+};
 </script>
