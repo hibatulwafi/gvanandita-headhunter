@@ -1,7 +1,7 @@
 <template>
   <!-- Hero Section -->
   <div class="relative bg-cover bg-center h-[280px] flex items-center justify-center"
-    style="background-image: url('/images/hero/hero-bg-jobs.jpg')" data-aos="fade-up">
+    style="background-image: url('/images/hero/find-career.jpeg')" data-aos="fade-up">
     <div class="bg-slate-900 bg-opacity-80 text-center px-6 py-8 mx-6 rounded-xl max-w-3xl w-full">
       <h1 class="text-2xl md:text-3xl font-bold text-white">
         Lowongan Kerja di Indonesia

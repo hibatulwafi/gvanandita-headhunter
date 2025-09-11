@@ -37,7 +37,7 @@
                 <Transition name="fade-slide" mode="out-in">
                     <div :key="activeSlide">
                         <h1
-                            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white drop-shadow-lg">
+                            class="text-4xl sm:text-5xl lg:text-5xl font-extrabold leading-tight text-white drop-shadow-lg">
                             <span class="text-gold-500">{{ slides[activeSlide].title1 }}</span> {{
                                 slides[activeSlide].title1white }} <br />
                             <span class="text-gold-500">{{ slides[activeSlide].title2 }}</span> {{
@@ -50,7 +50,7 @@
                             class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
                             <a @click.prevent="scroll"
                                 class="inline-block border border-white hover:border-gold-500 text-white hover:text-gold-500 font-semibold py-3 px-8 rounded-full transition-colors duration-300 text-lg cursor-pointer">
-                                More Info
+                                Informasi Selengkapnya
                             </a>
                         </div>
                     </div>
@@ -60,7 +60,6 @@
     </section>
 </template>
 
-// filepath: d:\project\gvanandita-headhunter\src\components\Hero.vue
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -70,29 +69,29 @@ const slides = [
     {
         image: '/images/hero/slider-1.jpg',
         alt: 'GVA Head Hunter',
-        title1: 'Find The',
-        title1white: 'Best Talent',
-        title2: 'For Your',
-        title2white: 'Business',
-        description: 'GVA Head Hunter is a company that is committed to present the Best Talent.'
+        title1: 'Temukan',
+        title1white: 'Talent Terbaik',
+        title2: 'Untuk',
+        title2white: 'Bisnis Anda',
+        description: 'GVA Head Hunter adalah perusahaan yang berkomitmen menghadirkan Talent Terbaik.'
     },
     {
         image: '/images/hero/slider-2.jpg',
         alt: 'GVA Head Hunter',
-        title1: 'Grow Your',
-        title1white: 'Business',
-        title2: 'With Our',
-        title2white: 'Expertise',
-        description: 'With extensive network and a precise recruitment process, we help companies finding competent candidates.'
+        title1: 'Kembangkan',
+        title1white: 'Bisnis Anda',
+        title2: 'Dengan',
+        title2white: 'Keahlian Kami',
+        description: 'Dengan jaringan yang luas dan proses rekrutmen yang sangat selektif, kami membantu perusahaan menemukan kandidat yang kompeten.'
     },
     {
         image: '/images/hero/slider-3.jpg',
         alt: 'GVA Head Hunter',
-        title1: 'Get The',
-        title1white: 'Best',
-        title2: 'For Your',
-        title2white: 'Company',
-        description: 'We present ourselves as a strategic partner in providing fast, professional, and reliable recruitment solutions.'
+        title1: 'Dapatkan',
+        title1white: 'Yang Terbaik',
+        title2: 'Untuk',
+        title2white: 'Perusahaan Anda',
+        description: 'Kami mempresentasikan diri sebagai partner strategis dalam memberikan solusi rekrutmen yang cepat, profesional, dan terpercaya.'
     }
 ]
 
@@ -117,19 +116,20 @@ const router = useRouter()
 const route = useRoute()
 
 const scroll = async () => {
-    if (route.path !== '/') {
-        await router.push('/#about')
+  if (route.path !== '/') {
+    await router.push('/#services')
+  }
+  setTimeout(() => {
+    const element = document.getElementById('services')
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: 'smooth'
+      })
     }
-    setTimeout(() => {
-        const element = document.getElementById('about')
-        if (element) {
-            window.scrollTo({
-                top: element.offsetTop - 80,
-                behavior: 'smooth',
-            })
-        }
-    }, 100)
+  }, 100)
 }
+
 </script>
 
 <style scoped>

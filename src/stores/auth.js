@@ -1,13 +1,10 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import axios from "axios";
-import router from "@/router"; // Impor router untuk pengalihan
+import router from "@/router";
 
-// Konfigurasi baseURL dari variabel lingkungan
 const API_BASE_URL = import.meta.env.VITE_APP_API_URL;
 axios.defaults.baseURL = API_BASE_URL;
-
-// Mengizinkan Axios mengirim kredensial (cookies)
 axios.defaults.withCredentials = true;
 
 export const useAuthStore = defineStore("auth", () => {
@@ -26,35 +23,24 @@ export const useAuthStore = defineStore("auth", () => {
     loading.value = true;
     error.value = null;
 
-
-    console.log("Token:", token.value);
-    console.log("User:", user.value);
-    console.log("Loading:", loading.value);
-    console.log("Error:", error.value);
-    console.log("API Base URL:", API_BASE_URL);
-    console.log("Credentials:", credentials);
     try {
       const response = await axios.post("/candidate/login", credentials);
       token.value = response.data.token;
       user.value = response.data.user;
 
-      // Simpan ke localStorage untuk mempertahankan sesi
       localStorage.setItem("token", token.value);
       localStorage.setItem("user", JSON.stringify(user.value));
       return true;
     } catch (e) {
       if (e.response) {
-        // Server merespons dengan kode status di luar 2xx
         if (e.response.status === 401) {
           error.value = "Email atau password salah.";
         } else {
           error.value = e.response.data.message || "Terjadi kesalahan pada server.";
         }
       } else if (e.request) {
-        // Permintaan dibuat, tetapi tidak ada respons yang diterima
         error.value = "Tidak dapat terhubung ke server. Periksa koneksi Anda atau coba lagi nanti.";
       } else {
-        // Kesalahan dalam menyiapkan permintaan
         error.value = "Terjadi kesalahan tidak terduga.";
       }
       return false;
@@ -66,10 +52,8 @@ export const useAuthStore = defineStore("auth", () => {
   function logout() {
     token.value = null;
     user.value = null;
-    // Hapus dari localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    // Alihkan ke halaman login
     router.push({ name: "login" });
   }
 
@@ -85,7 +69,6 @@ export const useAuthStore = defineStore("auth", () => {
         }
       }
 
-      // kalau ada file resume
       if (formData.resumeFile) {
         payload.append("resume_path", formData.resumeFile);
       }
@@ -94,17 +77,13 @@ export const useAuthStore = defineStore("auth", () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      // Backend sebaiknya return { user, token }
       token.value = response.data.token;
       user.value = response.data.user;
 
       localStorage.setItem("token", token.value);
       localStorage.setItem("user", JSON.stringify(user.value));
 
-      // langsung arahkan ke profile
-      router.push({
-        name: "profile",
-      });
+      router.push({ name: "profile" });
 
       return true;
     } catch (e) {
@@ -119,7 +98,27 @@ export const useAuthStore = defineStore("auth", () => {
     }
   }
 
-  // Interceptor untuk menyisipkan token ke setiap permintaan
+  async function updateProfile(payload) {
+    loading.value = true;
+    error.value = null;
+    try {
+      const response = await axios.put(`/candidate/profile`, payload);
+
+      user.value = response.data.user;
+      localStorage.setItem("user", JSON.stringify(user.value));
+
+      return response.data; // success
+    } catch (e) {
+      if (e.response?.data) {
+        throw e; // lempar ke caller
+      }
+      throw new Error("Tidak dapat terhubung ke server.");
+    } finally {
+      loading.value = false;
+    }
+  }
+
+  // Interceptors
   axios.interceptors.request.use(
     (config) => {
       const authStore = useAuthStore();
@@ -128,16 +127,11 @@ export const useAuthStore = defineStore("auth", () => {
       }
       return config;
     },
-    (error) => {
-      return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
   );
 
-  // Interceptor untuk menangani respons yang tidak terotorisasi
   axios.interceptors.response.use(
-    (response) => {
-      return response;
-    },
+    (response) => response,
     (error) => {
       const authStore = useAuthStore();
       if (error.response && (error.response.status === 401 || error.response.status === 403)) {
@@ -157,5 +151,6 @@ export const useAuthStore = defineStore("auth", () => {
     login,
     logout,
     register,
+    updateProfile,
   };
 });

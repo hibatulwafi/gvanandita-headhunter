@@ -4,7 +4,7 @@
     style="background-image: url('/images/hero/hero-bg-full.jpg');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="relative text-center text-white px-6">
-      <h1 class="text-3xl md:text-4xl font-bold" data-aos="zoom-in-left">About Us</h1>
+      <h1 class="text-3xl md:text-4xl font-bold" data-aos="zoom-in-left">Tentang Kami</h1>
       <p class="mt-3 text-lg max-w-2xl mx-auto" data-aos="zoom-in-right" data-aos-delay="200">
         GVA Head Hunter – Solusi Rekrutmen yang Profesional & Tepat Sasaran
       </p>

@@ -1,7 +1,9 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <Hero />
-    <Services />
+    <div id="services">
+      <Services />
+    </div>
     <FindCareers />
     <OurClients />
   </div>

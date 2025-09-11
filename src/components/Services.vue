@@ -148,6 +148,7 @@ const allCategories = [
 	{ nama: 'Pendidikan', textColor: 'text-gray-800' },
 	{ nama: 'Kesehatan', textColor: 'text-gray-800' },
 	{ nama: 'Legal', textColor: 'text-gray-800' },
+	{ nama: 'Talent Acquisition', textColor: 'text-gray-800' },
 ];
 
 const visibleCategories = computed(() => {
