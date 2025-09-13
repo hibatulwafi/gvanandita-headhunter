@@ -47,11 +47,18 @@
 					<div>
 						<p class="font-semibold text-gray-800">Salary</p>
 						<p class="text-sm">
-							<span v-if="job.min_salary && job.max_salary">
-								{{ formatCurrency(job.min_salary, job.salary_currency) }} -
-								{{ formatCurrency(job.max_salary, job.salary_currency) }}
-							</span>
-							<span v-else>Negotiable</span>
+							<template v-if="job.is_show_salary">
+								<span v-if="job.min_salary && job.max_salary">
+									{{ formatCurrency(job.min_salary, job.salary_currency) }} -
+									{{ formatCurrency(job.max_salary, job.salary_currency) }}
+								</span>
+								<span v-else>
+									Negotiable
+								</span>
+							</template>
+							<template v-else>
+								Gaji Tidak Ditampilkan
+							</template>
 						</p>
 					</div>
 				</div>
@@ -123,14 +130,14 @@ async function applyJob() {
 			icon: "success",
 			title: "Application Submitted",
 			text: "Your application has been sent successfully!",
-			confirmButtonColor: "#16a34a" // hijau Tailwind (green-600)
+			confirmButtonColor: "#16a34a"
 		})
 	} catch (error) {
 		Swal.fire({
 			icon: "error",
 			title: "Oops...",
 			text: error.message || "Failed to apply job.",
-			confirmButtonColor: "#dc2626" // merah Tailwind (red-600)
+			confirmButtonColor: "#dc2626"
 		})
 	} finally {
 		isApplying.value = false

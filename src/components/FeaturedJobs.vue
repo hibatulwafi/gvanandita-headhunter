@@ -91,9 +91,13 @@
               </h3>
 
               <!-- Salary -->
-              <p class="text-green-700 font-semibold text-right text-sm md:text-lg ml-2 shrink-0">
+              <p v-if="job.is_show_salary"
+                class="text-green-700 font-semibold text-right text-sm md:text-lg ml-2 shrink-0">
                 {{ formatCompactCurrency(job.min_salary, job.salary_currency) }} -
                 {{ formatCompactCurrency(job.max_salary, job.salary_currency) }}
+              </p>
+              <p v-else class="text-gray-600 text-right text-sm md:text-base ml-2 shrink-0">
+                Gaji Tidak Ditampilkan
               </p>
             </div>
 
